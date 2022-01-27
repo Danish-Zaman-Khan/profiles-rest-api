@@ -26,7 +26,7 @@ class UserProfileManager(BaseUserManager):
         #Returning the user
         return user
 
-    def create_super_user(self, email , name, password): #we want each super user must have password
+    def create_superuser(self, email , name, password): #we want each super user must have password
         '''Create and save new super user with given details'''
         user = self.create_user(email, name, password) #As we are calling the method inside the another method of same class so self is automatically passed -- django documentation
         user.is_superuser = True
