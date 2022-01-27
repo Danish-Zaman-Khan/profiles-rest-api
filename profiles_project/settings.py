@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',    #This is the app from djangoRest framework
     'rest_framework.authtoken',#This is the app from djangoRest framework for authentication
-    'profiles_api.apps.ProfilesApiConfig',  # App we created
+    'profiles_api.apps.ProfilesApiConfig',    # App we created
 ]
 
 MIDDLEWARE = [
@@ -121,3 +121,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+#Using our custom Usermanager
+AUTH_USER_MODEL = 'profiles_api.UserProfile'
