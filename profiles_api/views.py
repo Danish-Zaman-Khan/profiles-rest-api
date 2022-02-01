@@ -1,14 +1,26 @@
 
 #Creating our first API
-
 from rest_framework.views import APIView
+
 from rest_framework.views import Response
+
 #To get the status of response if the response is bad
 from rest_framework import status 
+
 #for creating the basic viewset we will import viewset
 from rest_framework import viewsets  
+
 #importing the serializer we created 
 from profiles_api import serializer
+
+#importing the models 
+from profiles_api import models
+
+#Importing for the authentication 
+from rest_framework.authentication import TokenAuthentication
+
+#importing the permission we created manually
+from profiles_api import permissions
 
 class HelloApiView(APIView):
     ''' Test API ''' 
@@ -108,4 +120,18 @@ class HelloViewSet(viewsets.ViewSet):
     
     def destroy(self, request, pk= None):
         '''delete an object'''
-        return Response({'http_method':'Delete'})        
+        return Response({'http_method':'Delete'})  
+
+#using the model viewset to handle the model
+class UserProfileViewSet(viewsets.ModelViewSet):
+    
+    '''Handle creating and updating profiles'''
+    #Configuring the serializer for the viewset
+    serializer_class = serializer.UserProfileSerializer
+    #Specifying the which objects we gonna manage with the viewset
+    queryset = models.UserProfile.objects.all()
+    #Creating the proper authentication 
+    #We can add multiple authentication classes below using , to create tuple
+    authentication_classes = (TokenAuthentication,)
+    #We can add multiple permission classes below using , to create tuple
+    permission_classes = (permissions.UpdateOwnProfile,)  

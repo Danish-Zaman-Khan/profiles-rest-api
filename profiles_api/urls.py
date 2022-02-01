@@ -5,9 +5,14 @@ from rest_framework.routers import DefaultRouter
 
 #Creating the router so that viewsets can be accessed
 router = DefaultRouter()
+
 #Like we register any viewset it is the std. method
 router.register('hello-viewset',views.HelloViewSet,base_name = 'hello-viewset')
 
+#registering the UserProfileViewSet to router
+#Not specifying the base_name as already mentioned queryset name
+#or specify if want to override the name 
+router.register('profile',views.UserProfileViewSet)
 
 #as_view() converts tells the django to render the class based views
 urlpatterns = [
