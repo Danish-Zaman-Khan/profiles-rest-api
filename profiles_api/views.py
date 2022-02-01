@@ -19,6 +19,9 @@ from profiles_api import models
 #Importing for the authentication 
 from rest_framework.authentication import TokenAuthentication
 
+#importing the filter class in order to provide the search ability
+from rest_framework import filters
+
 #importing the permission we created manually
 from profiles_api import permissions
 
@@ -135,3 +138,8 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     authentication_classes = (TokenAuthentication,)
     #We can add multiple permission classes below using , to create tuple
     permission_classes = (permissions.UpdateOwnProfile,)  
+    
+    filter_backends = (filters.SearchFilter,)
+    #Specifying the field with which we can search
+    search_fields = ('name','email',)
+    
