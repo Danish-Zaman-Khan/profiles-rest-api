@@ -16,5 +16,7 @@ router.register('profile',views.UserProfileViewSet)
 
 #as_view() converts tells the django to render the class based views
 urlpatterns = [
-    path('hello-view/', views.HelloApiView.as_view(), name = 'hello-view'),path('',include(router.urls)) #Note:No need for the '' as we do in the urls to include the apps  #leaving the blank string because router do the work for us the router.urls creates the list for us to access all the viewsets
+    path('hello-view/', views.HelloApiView.as_view(), name = 'hello-view'),
+    path('login/',views.UserLoginView.as_view(), name = 'login'),
+    path('',include(router.urls)) #Note:No need for the '' as we do in the urls to include the apps  #leaving the blank string because router do the work for us the router.urls creates the list for us to access all the viewsets
 ]

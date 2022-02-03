@@ -8,7 +8,12 @@ from rest_framework.views import Response
 from rest_framework import status 
 
 #for creating the basic viewset we will import viewset
-from rest_framework import viewsets  
+from rest_framework import viewsets 
+
+#improting classes to obtain authentication token
+from rest_framework.authtoken.views import ObtainAuthToken
+#Also importing the settings for add render class in our auth token in order to import default rende class
+from rest_framework.settings import api_settings 
 
 #importing the serializer we created 
 from profiles_api import serializer
@@ -142,4 +147,13 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     filter_backends = (filters.SearchFilter,)
     #Specifying the field with which we can search
     search_fields = ('name','email',)
+
+
+#Creating the endpoints for our viewset
+
+class UserLoginView(ObtainAuthToken):
+    
+    '''Handle creating the user authentication'''
+    #We need this in order enable the ObtainAuthToken class
+    renderer_classes = api_settings.DEFAULT_RENDERER_CLASSES
     
