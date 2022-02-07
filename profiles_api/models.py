@@ -5,6 +5,8 @@ from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 #importing the default manager provided by django to override
 from django.contrib.auth.models import BaseUserManager
+#imporing the settings so that we can use model reference from it
+from django.conf import settings
 
 #Creating the custom User manager that takes email to create and control users
 class UserProfileManager(BaseUserManager):
@@ -72,3 +74,20 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
         '''Retrive the string representation of user'''
 
         return self.email  #This will show the model with email in the list
+
+#creating the feed model
+class UserProfileFeedItem(models.Model):
+
+    '''Profile status update'''
+
+    #Creating the foreign key provides many to one relationship
+    user_profile = models.ForeignKey(settings.AUTH_USER_MODEL,#Using the reference to make more static so that we can change the model at only one place it reflect everywhere it is used(good practice)
+        on_delete = models.CASCADE
+    )
+    status_text = models.CharField(max_length = 255)
+    created_on = models.DateTimeField(auto_now_add = True)
+
+    #String representation of the model
+    def __str__(self):
+        '''Return model as string'''
+        return self.status_text

@@ -14,6 +14,9 @@ router.register('hello-viewset',views.HelloViewSet,base_name = 'hello-viewset')
 #or specify if want to override the name 
 router.register('profile',views.UserProfileViewSet)
 
+#Specifying the UserProfileFeedItem 
+router.register('feed',views.UserProfileFeedViewSet)
+
 #as_view() converts tells the django to render the class based views
 urlpatterns = [
     path('hello-view/', views.HelloApiView.as_view(), name = 'hello-view'),
